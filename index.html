@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">SkillNexis • Week 4</p>
+                <h1>Student Management Dashboard</h1>
+                <p class="subtitle">Manage student records with JavaScript and localStorage.</p>
+            </div>
+            <button class="primary-btn" id="addStudentBtn">+ Add Student</button>
+        </header>
+
+        <main>
+            <section class="stats-grid">
+                <article class="stat-card">
+                    <span>Total Students</span>
+                    <strong id="totalStudents">0</strong>
+                </article>
+                <article class="stat-card">
+                    <span>Active Students</span>
+                    <strong id="activeStudents">0</strong>
+                </article>
+                <article class="stat-card">
+                    <span>Inactive Students</span>
+                    <strong id="inactiveStudents">0</strong>
+                </article>
+            </section>
+
+            <section class="panel">
+                <div class="toolbar">
+                    <div class="search-box">
+                        <label for="searchInput">Search</label>
+                        <input
+                            type="search"
+                            id="searchInput"
+                            placeholder="Search by name, ID or email..."
+                        >
+                    </div>
+
+                    <div class="filter-box">
+                        <label for="courseFilter">Course</label>
+                        <select id="courseFilter">
+                            <option value="all">All Courses</option>
+                            <option value="CSE">CSE</option>
+                            <option value="IT">IT</option>
+                            <option value="ECE">ECE</option>
+                            <option value="ME">ME</option>
+                            <option value="CE">CE</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-box">
+                        <label for="statusFilter">Status</label>
+                        <select id="statusFilter">
+                            <option value="all">All Status</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Student ID</th>
+                                <th>Course</th>
+                                <th>Year</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentTableBody"></tbody>
+                    </table>
+
+                    <div class="empty-state" id="emptyState">
+                        <div class="empty-icon">🎓</div>
+                        <h3>No students found</h3>
+                        <p>Add a student or change your search/filter.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Week 4 Major Project • Student Management Dashboard</p>
+        </footer>
+    </div>
+
+    <div class="modal hidden" id="studentModal" aria-hidden="true">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div>
+                    <p class="eyebrow">Student Record</p>
+                    <h2 id="modalTitle">Add Student</h2>
+                </div>
+                <button class="close-btn" id="closeModalBtn" aria-label="Close">&times;</button>
+            </div>
+
+            <form id="studentForm">
+                <input type="hidden" id="editIndex">
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="studentName">Full Name</label>
+                        <input type="text" id="studentName" required maxlength="50">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="studentId">Student ID</label>
+                        <input type="text" id="studentId" required maxlength="20">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="studentCourse">Course</label>
+                        <select id="studentCourse" required>
+                            <option value="">Select course</option>
+                            <option value="CSE">CSE</option>
+                            <option value="IT">IT</option>
+                            <option value="ECE">ECE</option>
+                            <option value="ME">ME</option>
+                            <option value="CE">CE</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="studentYear">Year</label>
+                        <select id="studentYear" required>
+                            <option value="">Select year</option>
+                            <option value="1st Year">1st Year</option>
+                            <option value="2nd Year">2nd Year</option>
+                            <option value="3rd Year">3rd Year</option>
+                            <option value="4th Year">4th Year</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="studentEmail">Email</label>
+                        <input type="email" id="studentEmail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="studentStatus">Status</label>
+                        <select id="studentStatus" required>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="secondary-btn" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="primary-btn">Save Student</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
